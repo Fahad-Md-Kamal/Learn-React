@@ -2,54 +2,108 @@ import React, {useState} from "react";
 
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
-    // const [enteredTitle, setEnteredTitle] = useState('');
-    // const [enteredAmount, setEnteredAmount] = useState('');
-    // const [enteredDate, setEnteredDate] = useState('');
-
-    const [userInput, setUserInput] = useState({
-        enteredTitle:'',
-        enteredAmount: '',
-        enterdDate: ''
-    });
+const ExpenseForm = (props) => {
+    const [enteredTitle, setEnteredTitle] = useState('');
+    const [enteredAmount, setEnteredAmount] = useState('');
+    const [enteredDate, setEnteredDate] = useState('');
 
     const titleChangeHandler = (event) => {
-        // setEnteredTitle(event.target.value);
-        setUserInput({
-            enteredTitle: event.target.value
-        })
-        console.log(event.target.value);
-    };
-    const amountChangeHandler = (event) => {
-        // setEnteredAmount(event.target.value);
-        console.log(event.target.value);
-    };
-    const dateChangeHandler = (event) => {
-        // setEnteredDate(event.target.value);
-        console.log(event.target.value);
+        setEnteredTitle(event.target.value);
     };
 
+    const amountChangeHandler = (event) => {
+      setEnteredAmount(event.target.value);
+    };
+    
+    const dateChangeHandler = (event) => {
+      setEnteredDate(event.target.value);
+    };
+
+    // const [userInput, setUserInput] = useState({
+    //     enteredTitle:'',
+    //     enteredAmount: '',
+    //     enterdDate: ''
+    // });
+
+    // const titleChangeHandler = (event) => {
+    //     // setUserInput({
+    //     //   ...userInput,
+    //     //   enteredTitle: event.target.value
+    //     // })
+    //     // console.log(event.target.value);
+    //   setUserInput((prevState) => {
+    //     return {
+    //       ...prevState, 
+    //       enteredTitle: event.target.value
+    //     };
+    //   });
+    // };
+
+    // const amountChangeHandler = (event) => {
+    //     // setUserInput({
+    //     //   ...userInput,
+    //     //   enteredAmount: event.target.value
+    //     // })
+    //     // console.log(event.target.value);
+    //     setUserInput((prevState) => {
+    //       return {
+    //         ...prevState, 
+    //         enteredAmount: event.target.value
+    //       };
+    //     });
+    // };
+
+    // const dateChangeHandler = (event) => {
+    //     // setUserInput({
+    //     //   ...userInput,
+    //     //   enterdDate: event.target.value
+    //     // })
+    //     // console.log(event.target.value);
+    //     setUserInput((prevState) => {
+    //       return {
+    //         ...prevState, 
+    //         enterdDate: event.target.value
+    //       };
+    //     });
+    // };
+
+    const submitHandler = (event) => {
+      event.preventDefault();
+
+      const expenseData = {
+          title: enteredTitle,
+          amount : enteredAmount,
+          date: new Date(enteredDate),
+      };
+      // console.log(expenseData);
+      props.onSaveExpenseData(expenseData);
+      setEnteredTitle('');
+      setEnteredAmount('');
+      setEnteredDate('');
+    };
 
     return (
-      <form>
+      <form onSubmit={submitHandler}>
         <div className="new-expense__controls">
           <div className="new-expense__control">
             <label>Title</label>
-            <input type="text" onChange={titleChangeHandler} />
+            <input type="text" value={enteredTitle} onChange={titleChangeHandler} />
           </div>
           <div className="new-expense__control">
             <label>Amount</label>
             <input
+             value={enteredAmount}
               type="number"
               min="0.01"
-              step="0..1"
+              step="0.01"
               onChange={amountChangeHandler}
             />
           </div>
           <div className="new-expense__control">
             <label>Date</label>
             <input
-              type="date"
+             value={enteredDate}
+             type="date"
               min="2021-02-01"
               step="2022-05-1"
               onChange={dateChangeHandler}

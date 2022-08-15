@@ -62,7 +62,6 @@ function App() {
     });
   }, [cart, dispatch]);
 
-    console.log(notification);
     return (
     <>
       {notification && (

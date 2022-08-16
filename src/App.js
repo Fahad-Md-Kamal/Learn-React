@@ -5,8 +5,8 @@ import Notification from "./components/UI/Notification";
 
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { sendCartData } from "./store/cart-slice";
+import React, { useEffect } from "react";
+import { fetchCardData, sendCartData } from "./store/cart-actions";
 
 let isInitial = true;
 
@@ -17,15 +17,21 @@ function App() {
   const notification = useSelector((state) => state.ui.notification);
 
   useEffect(() => {
+    dispatch(fetchCardData());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (isInitial) {
       isInitial = false;
       return;
     }
-    dispatch(sendCartData(cart));
+    if (cart.changed){
+       dispatch(sendCartData(cart));
+    }
   }, [cart, dispatch]);
 
     return (
-    <>
+    <React.Fragment>
       {notification && (
         <Notification
           status={notification.status}
@@ -37,7 +43,7 @@ function App() {
         {showCart && <Cart />}
         <Products />
       </Layout>
-    </>
+    </React.Fragment>
   );
 }
 

@@ -1,10 +1,15 @@
 import { RouterProvider } from 'react-router-dom'
-import { router } from './pages/home-page/router'
+import AuthContextProvider, { useAuthContext } from './contexts/AuthContext'
+import { privateRouter, publicRouter } from './pages/router'
 
 function App() {
+  const { isLoggedIn } = useAuthContext();
+  console.log('isLoggedIn', isLoggedIn);
 
   return (
-    <RouterProvider router={router} />
+    <>
+      <RouterProvider router={isLoggedIn ? privateRouter : publicRouter} />
+    </>
   )
 }
 

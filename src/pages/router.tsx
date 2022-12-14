@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import HomePage from ".";
-import Layout from "../../compoonents/Layout";
-import DashboardPage from "../dashboard";
+import Layout from "../compoonents/Layout";
+import DashboardPage from "./dashboard";
+import HomePage from "./home-page";
+import LoginPage from "./login";
 
-export const router = createBrowserRouter([
+export const privateRouter = createBrowserRouter([
     {
         path: '/',
         element: <Layout />,
@@ -17,7 +18,14 @@ export const router = createBrowserRouter([
                 element: <DashboardPage />
             },
         ],
-
-
     },
+])
+
+export const publicRouter = createBrowserRouter([
+    {
+        path: '/',
+        element: <LoginPage />
+    },
+
+
 ])

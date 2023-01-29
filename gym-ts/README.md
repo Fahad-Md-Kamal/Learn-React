@@ -17,7 +17,7 @@ npm install
 Install project dependencies:
 
 ```sh
-npm i framer-motion react-anchor-link-smooth-scroll@1.0.2 @heroicons/react
+npm i framer-motion react-anchor-link-smooth-scroll@1.0.12 @heroicons/react
 ```
 
 In-order to TS to know package types manually Install dev deps:
@@ -62,4 +62,15 @@ Install tailwind with vite:
 npm install -D tailwindcss postcss autoprefixer
 
 npx tailwindcss init -p
+```
+
+<!-- Configure prettyer to beautify tailwind classes -->
+
+Create File called `prettier.config.cjs`
+Add the following code:
+
+```js
+module.exports = {
+  Plugins: [require("prettier-plugin-tailwindcss")],
+};
 ```

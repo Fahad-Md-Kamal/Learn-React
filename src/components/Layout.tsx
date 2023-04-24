@@ -1,8 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
+import Navbar from "./navbar/Navbar";
 
 interface Props {
   children: ReactNode;
@@ -11,23 +8,15 @@ interface Props {
 function Layout({ children }: Props) {
   return (
     <div className="layout">
-      <AppBar position="static">
-        <Toolbar>
-          <Button color="inherit">
-            <Link to="/">Home</Link>
-          </Button>
-          <Button color="inherit">
-            <Link to="/about">About</Link>
-          </Button>
-          <Button color="inherit">
-            <Link to="/signup">Signup</Link>
-          </Button>
-          <Button color="inherit">
-            <Link to="/login">Login</Link>
-          </Button>
-        </Toolbar>
-      </AppBar>
-      <main>{children}</main>
+      <header>
+        <Navbar />
+      </header>
+      <div className="flex flex-row">
+        <div className="w-1/3 bg-gray-200 p-4"></div>
+        <div className="w-2/3 bg-gray-100 p-4">
+          <main>{children}</main>
+        </div>
+      </div>
     </div>
   );
 }

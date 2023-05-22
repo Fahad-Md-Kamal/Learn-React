@@ -11,12 +11,10 @@ type Props = {};
 const Navbar = (props: Props) => {
   return (
     <div
-      className="fixed w-full bg-wh
-     z-10 shadow-sm"
-    >
-      <div className="py-4 border-b-[1px]">
+      className="bg-wh fixed z-10 w-full shadow-sm">
+      <div className="border-b-[1px] py-4">
         <Container>
-          <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
+          <div className="mt-3 flex  flex-row items-center justify-between gap-3 md:gap-0">
             <Logo />
             <Search />
             <UserMenu />

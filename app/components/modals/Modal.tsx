@@ -17,37 +17,48 @@ type Props = {
   secondaryActionLabel?: string;
 };
 
-const Modal: React.FC<Props> = (props: Props) => {
-  const [showModal, setShowModal] = useState(props.isOpen);
+const Modal: React.FC<Props> = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  title,
+  body,
+  footer,
+  actionLabel,
+  disabled,
+  secondaryAction,
+  secondaryActionLabel
+}) => {
+  const [showModal, setShowModal] = useState(isOpen);
   useEffect(() => {
-    setShowModal(props.isOpen);
-  }, [props.isOpen]);
+    setShowModal(isOpen);
+  }, [isOpen]);
 
   const handleClose = useCallback(() => {
-    if (props.disabled) {
+    if (disabled) {
       return;
     }
     setShowModal(false);
     setTimeout(() => {
-      props.onClose();
+      onClose();
     }, 300);
-  }, [props.disabled, props.onClose]);
+  }, [disabled, onClose]);
 
   const handleSubmit = useCallback(() => {
-    if (props.disabled) {
+    if (disabled) {
       return;
     }
-    props.onSubmit();
-  }, [props.disabled, props.onSubmit]);
+    onSubmit();
+  }, [disabled, onSubmit]);
 
   const handleSecodaryAction = useCallback(() => {
-    if (props.disabled || !props.secondaryAction) {
+    if (disabled || !secondaryAction) {
       return;
     }
-    props.secondaryAction();
-  }, [props.disabled, props.secondaryAction]);
+    secondaryAction();
+  }, [disabled, secondaryAction]);
 
-  if (!props.isOpen) {
+  if (!isOpen) {
     return null;
   }
 
@@ -102,10 +113,10 @@ const Modal: React.FC<Props> = (props: Props) => {
                 >
                   <IoMdClose></IoMdClose>
                 </button>
-                <div className="foont-semibold text-lg">{props.title}</div>
+                <div className="foont-semibold text-lg">{title}</div>
               </div>
               {/* BODY */}
-              <div className="relative flex-auto p-6">{props.body}</div>
+              <div className="relative flex-auto p-6">{body}</div>
               {/* FOOTER */}
               <div className="flex flex-col gap-2 p-6">
                 <div
@@ -115,18 +126,18 @@ const Modal: React.FC<Props> = (props: Props) => {
                 items-center 
                 gap-4"
                 >
-                  {props.secondaryAction && props.secondaryActionLabel && (
+                  {secondaryAction && secondaryActionLabel && (
                     <Button
                       outline
-                      disabled={props.disabled}
-                      label={props.secondaryActionLabel}
+                      disabled={disabled}
+                      label={secondaryActionLabel}
                       onClick={handleSecodaryAction}
                     />
                   )}
 
                   <Button
-                    disabled={props.disabled}
-                    label={props.actionLabel}
+                    disabled={disabled}
+                    label={actionLabel}
                     onClick={handleSubmit}
                   />
                 </div>

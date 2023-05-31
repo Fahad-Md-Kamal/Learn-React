@@ -4,6 +4,7 @@ import { Nunito } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
 import ClientOnly from "./components/ClientOnly";
 import RegisterModel from "./components/modals/RegisterModel";
+import ToasterProvier from "./providers/ToasterProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const font = Nunito({
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} ${font.className}`}>
         <ClientOnly>
+          <ToasterProvier />
           <RegisterModel />
           <Navbar />
         </ClientOnly>
